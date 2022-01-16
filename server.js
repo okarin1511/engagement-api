@@ -32,9 +32,15 @@ app.post('/add_vendor', (req, res) => {
 
 app.get('/get_vendor', (req, res) => {
     const vendorname = req.body.vendorname;
-    const engagement = req.body.engagement;
     
-    User.find({ vendorname: vendorname, engagement: engagement })
+    Vendor.find({ vendorname: vendorname })
+        .then(data => res.json(data))
+        .catch(err => res.status(400).json('Error: ' * err));
+});
+
+app.get('/get_all', (req, res) => {
+    
+    Vendor.find()
         .then(data => res.json(data))
         .catch(err => res.status(400).json('Error: ' * err));
 });
